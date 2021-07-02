@@ -4,7 +4,32 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 private fun findAllRectangles(image: List<List<Int>>): MutableList<List<Int>> {
-    TODO("not implemented")
+
+    var resultList = mutableListOf<List<Int>>()
+    image.forEachIndexed { rowIndex, list ->
+        list.forEachIndexed { columnIndex, i ->
+            if (i == 0 ) {
+                if(image.getOrNull(rowIndex -1)?.getOrNull(columnIndex) != 0 && image.getOrNull(rowIndex)?.getOrNull(columnIndex -1)  != 0) {
+                    resultList.add(findCoordinatesFor(image, rowIndex, columnIndex))
+                }
+            }
+        }
+    }
+    return resultList
+}
+
+private fun findCoordinatesFor(image: List<List<Int>>, rowIndex: Int, columnIndex: Int): List<Int> {
+    // line crossing
+    var row = rowIndex
+    var column = columnIndex
+    while (image.getOrNull(rowIndex + 1)?.getOrNull(columnIndex) == 0) {
+        row++
+    }
+    // column crossing
+    while (image.getOrNull(rowIndex)?.getOrNull(columnIndex + 1) == 0) {
+        column++
+    }
+    return listOf(rowIndex, columnIndex, row, column)
 }
 
 private class Test {
