@@ -33,7 +33,7 @@ private class Test {
 
     @Test
     fun `ReverseInt flips a negative number`() {
-      //  reverseInt(-5) shouldBeEqualTo -5
+        reverseInt(-5) shouldBeEqualTo -5
         reverseInt(-15) shouldBeEqualTo -51
         reverseInt(-90) shouldBeEqualTo -9
         reverseInt(-700) shouldBeEqualTo -7
