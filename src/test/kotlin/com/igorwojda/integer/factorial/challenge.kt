@@ -3,9 +3,12 @@ package com.igorwojda.integer.factorial
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-private fun factorial(n: Int): Int {
-    TODO("not implemented")
-}
+private fun factorial(n: Int): Int =
+    when (n) {
+        0 -> 1
+        in (1..n) -> (1..n).reduce { acc, i -> acc * i }
+        else -> 1
+    }
 
 class RecursiveFactorial {
     @Test
