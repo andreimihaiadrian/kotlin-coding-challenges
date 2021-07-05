@@ -4,7 +4,50 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 private fun generateSpiralMatrix(n: Int): List<MutableList<Int?>> {
-    TODO("not implemented")
+    var top = 0
+    var right = n - 1
+    var bottom = n - 1
+    var left = 0
+
+    // Initialize matrix with 0 values
+    val matrix = MutableList(n) {
+        MutableList<Int?>(n) { 0 }
+    }
+
+    var count = 0
+
+    // run this until matrix size is reached
+    while (count < n * n) {
+        // left to right traversing
+        for (value in left .. right) {
+            count ++
+            matrix[top][value] = count
+        }
+        top ++
+
+        // top to bottom traversing
+        for (value in top .. bottom) {
+            count ++
+            matrix[value][right] = count
+        }
+        right --
+
+        // right to left traversing
+        for (value in right downTo left) {
+            count ++
+            matrix[bottom][value] = count
+        }
+        bottom --
+
+        // returning from bottom to top and then check if count less than matrix size
+        for (value in bottom downTo top) {
+            count ++
+            matrix[value][left] = count
+        }
+        left ++
+    }
+
+    return matrix
 }
 
 private class Test {
